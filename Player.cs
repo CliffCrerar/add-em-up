@@ -4,9 +4,13 @@ namespace addmup
 	public class Player
 	{
 		public static int number = 0;
+
 		public string Name { get; }
+
 		private string[] _rawCards { get; }
+
 		public IList<Card> Cards { get; }
+
 		public Player(string playerNameAndScore)
 		{
 			Player.number += 1;
@@ -16,14 +20,26 @@ namespace addmup
 			setCards();
 		}
 
+		public int CardValueScore()
+		{
+			return Cards.Sum(card => card.Value);
+		}
+
+        public int CardSuitScore()
+		{
+			return Cards.Sum(card => card.SuitValue);
+		}
+
 		private string setPlayerName(string playerNameAndScore)
 		{
 			return playerNameAndScore.Split(":")[0];
 		}
+
 		private string[] setPlayerCards(string playerNameAndScore)
 		{
 			return playerNameAndScore.Split(":")[1].Replace(" ","").Split(",");
 		}
+
 		private void setCards()
 		{
 			foreach(var code in _rawCards)

@@ -10,29 +10,18 @@ namespace addmup
 		public string SuitCode { get; }
         public int SuitValue { get; }
         public string? PictureName { get; set; }
+        private string _cardCode;
 
         public Card(string cardCode) 
 		{
+            _cardCode = cardCode;
 			SuitCode = cardCode.Substring(cardCode.Length - 1);
-
 			SuitName = assignSuitName();
-
             SuitValue = assignSuiteValue();
-
             CardValue = cardCode.Substring(0, cardCode.Length - 1);
-
             Picture = isCardPicture();
-
             Value = assignCardScore();
-
-            Console.WriteLine($"Dealing Card {cardCode}");
-			Console.WriteLine(SuitCode);
-            Console.WriteLine(SuitName);
-            Console.WriteLine(SuitValue);
-            Console.WriteLine(CardValue);
-            Console.WriteLine(Value);
-            Console.WriteLine(Picture);
-            Console.WriteLine(PictureName);
+            //logValues();
         }
 
 		private string assignSuitName()
@@ -43,7 +32,7 @@ namespace addmup
                 case "D": return "Daimonds";
                 case "C": return "Clubs";
                 case "S": return "Spades";
-                default: return "Unknown";
+                default: throwSuiteCodeError(); return "Unknown";
             }
         }
 
@@ -55,7 +44,8 @@ namespace addmup
                 case "D": return 2;
                 case "C": return 1;
                 case "S": return 4;
-                default: return 0;
+                default: throwSuiteCodeError(); return 0;
+                        
             }
         }
 
@@ -76,6 +66,31 @@ namespace addmup
             }
 		}
 
+        private void throwSuiteCodeError()
+        {
+            throw new Exception($"{SuitCode} is not valid!");
+        }
+
+        private void logValues()
+        {
+            Console.WriteLine($"Dealing Card {_cardCode}");
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine($"----- START CARD {_cardCode}  ------");
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("SuitCode: " + SuitCode);
+            Console.WriteLine("SuitName: " + SuitName);
+            Console.WriteLine("SuitValue: " + SuitValue);
+            Console.WriteLine("CardValue: "+ CardValue);
+            Console.WriteLine("Value: "+Value);
+            if(Picture)
+            {
+                Console.WriteLine("Picture: " + Picture);
+                Console.WriteLine("PictureName: " + PictureName);
+            }
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine($"----- END CARD {_cardCode}  ------");
+            Console.WriteLine("-----------------------------------");
+        }
     }
 }
 

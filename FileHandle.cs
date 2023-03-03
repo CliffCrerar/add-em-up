@@ -3,31 +3,43 @@ namespace addmup
 {
 	public class FileHandle
 	{
-		private string[] _args;
+
+		private string _inputFile;
+		private string _outputFile;
 		public FileHandle(string[] args)
 		{
 			if (args.Length == 0) throw new ArgumentException("No input was provided");
-			_args = args;
-			
-		}
 
-		public void ShowArguments()
-		{
-			for(var i = 0; i < _args.Length; i++) {
-				Console.WriteLine(_args[i]);
+			_inputFile = "abc.txt";
+			_outputFile = "xyz.txt";
+
+			for(var i = 0; i < args.Length; i++)
+			{
+				if (args[i]=="--in")
+				{
+					_inputFile = args[i + 1];
+				}
+				if (args[i]=="--out")
+				{
+					_outputFile = args[i + 1];
+				}
 			}
 		}
 
 		public string[] ReadInputFile()
 		{
-			var filePath = _args[1];
-			if(!File.Exists(filePath))
+			if(!File.Exists(_inputFile))
 			{
 				throw new Exception("Input File Not found!");
 			};
 
-			return File.ReadAllLines(filePath);
+			return File.ReadAllLines(_inputFile);
         }
+
+		public void WriteOutFile(string outPut)
+		{
+			File.WriteAllText(_outputFile, outPut);
+		}
 	}
 }
 
