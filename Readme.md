@@ -8,6 +8,12 @@ This is .Net console app, its focus is to add up the scores of a card game that 
 
 ## Running
 
+### Prerequisites
+
+1. [`.Net 6 Sdk`](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+
+### Locally
+
 1. Clone this repo.
 2. Open terminal and cd to the project.
 3. Create a file with content similar to this and name it `abc.txt`:
@@ -19,7 +25,7 @@ Player4:7C,6D,AS,7S,QS
 Player5:4D,KS,3C,8H,10D
 Player6:2D,QD,9D,7H,9H
 ```
-3. Run 'dotnet build && dotnet run --in abc.txt --out xyx.txt'
+3. Run `dotnet build && dotnet run --in abc.txt --out xyx.txt`
 
 The result of the score calculation will be written to the '--out' file.
 
